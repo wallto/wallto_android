@@ -21,29 +21,25 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var tokenService: TokenService
     private lateinit var prefs: SharedPreferences
     private var isUserSignIn: Boolean = false
+    private lateinit var userInfo: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
-
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        if (prefs.getString(PrefsHelper.TOKEN, "") != "") {
+            // Получает запрос список запросов для работы с токеном
+            val retrofit = RestApi.getInstance()
+            tokenService = retrofit.create(TokenService::class.java)
+            checkTokenValid()
+        } else {
+            setContentView(R.layout.activity_auth)
 
-        // Получает запрос список запросов для работы с токеном
-        val retrofit = RestApi.getInstance()
-        tokenService = retrofit.create(TokenService::class.java)
-
-        checkTokenValid()
-
-        if (isUserSignIn) {
-            successAuth()
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.authContainer, StartFragment())
+                .commit()
         }
-
-        setContentView(R.layout.activity_auth)
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.authContainer, StartFragment())
-            .commit()
     }
 
 //TODO Здесь нужно будет сделать так, чтобы при отрицательном тесте на валидность
@@ -58,31 +54,31 @@ class AuthActivity : AppCompatActivity() {
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
                     if (t.message == "ok") {
-                        isUserSignIn
-                    } else {
-                        refreshToken()
+                        System.out.println("Ответ на cvt: " + t.message)
+                        successAuth()
                     }
                 }
 
                 override fun onError(e: Throwable) {
-                    Toast.makeText(this@AuthActivity, "Ошибка: " + e.message, Toast.LENGTH_SHORT).show()
+                    System.out.println("Ошибка cvt: " + e.message)
+                    refreshToken()
                 }
-
             })
     }
 
     @SuppressLint("CheckResult")
     private fun refreshToken() {
-        tokenService.refreshToken(PrefsHelper.TOKEN, "gnomes")
+        tokenService.refreshToken(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
+                    System.out.println("Ответ на extend: " + t.user_token)
                     updateTokenData(t)
                 }
 
                 override fun onError(e: Throwable) {
-                    Toast.makeText(this@AuthActivity, "Refresh error: " + e.message, Toast.LENGTH_SHORT).show()
+                    System.out.println("Refresh error: " + e.message)
                 }
             })
     }
@@ -91,13 +87,13 @@ class AuthActivity : AppCompatActivity() {
         val ed = prefs.edit()
         ed.putString(PrefsHelper.TOKEN, user.user_token)
         ed.apply()
-
-        isUserSignIn
+        successAuth()
     }
 
     private fun successAuth() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+        overridePendingTransition(0, 0) // Блокирует анимацию при переходе, если пользователь уже авторизовался
     }
 }

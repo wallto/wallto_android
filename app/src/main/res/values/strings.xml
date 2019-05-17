@@ -9,4 +9,12 @@
     <string name="nav_settings">Настройки</string>
     <string name="hint_login">Введите логин</string>
     <string name="hint_password">Введите пароль</string>
+    <string name="send">Отправить</string>
+    <string name="auth2">Войти</string>
+    <string name="auth3">Войти в аккаунт</string>
+    <string name="go_back"> Назад</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="password2">Повторите пароль</string>
+    <string name="welcome">Добро пожаловать!</string>
 </resources>

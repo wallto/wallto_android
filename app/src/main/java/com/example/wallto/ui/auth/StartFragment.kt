@@ -37,7 +37,7 @@ class StartFragment : Fragment() {
     private  val onRegisterClickListener = View.OnClickListener {
         fragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.authContainer, AuthFragment())
+            ?.replace(R.id.authContainer, RegisterFragment())
             ?.addToBackStack(null)
             ?.commit()
     }

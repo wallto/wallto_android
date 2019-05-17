@@ -17,5 +17,4 @@
             app:layout_constraintStart_toStartOf="parent">
 
     </FrameLayout>
-
 </android.support.constraint.ConstraintLayout>
