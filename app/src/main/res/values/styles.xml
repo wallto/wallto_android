@@ -19,7 +19,7 @@
     </style>
 
     <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@mipmap/ic_launcher_round</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
 </resources>
