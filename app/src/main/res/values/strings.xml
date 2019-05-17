@@ -7,4 +7,6 @@
     <string name="nav_wallets">Счета</string>
     <string name="nav_charts">Курсы</string>
     <string name="nav_settings">Настройки</string>
+    <string name="hint_login">Введите логин</string>
+    <string name="hint_password">Введите пароль</string>
 </resources>

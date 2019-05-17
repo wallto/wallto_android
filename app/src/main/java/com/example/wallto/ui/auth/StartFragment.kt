@@ -10,19 +10,35 @@ import com.example.wallto.R
 import com.example.wallto.ui.auth.AuthFragment
 
 class StartFragment : Fragment() {
+    private lateinit var btnAuth: Button
+    private lateinit var btnRegister: Button
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val v = inflater.inflate(R.layout.fragment_start, container, false)
 
-        val button = v.findViewById<Button>(R.id.btnAuth)
+        btnAuth = v.findViewById(R.id.btnAuth)
+        btnRegister = v.findViewById(R.id.btnRegister)
 
-        button.setOnClickListener {
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.authContainer, AuthFragment())
-                ?.commit()
-        }
+        btnAuth.setOnClickListener(onAuthClickListener)
+        btnRegister.setOnClickListener(onRegisterClickListener)
 
         return v
+    }
+
+    private val onAuthClickListener = View.OnClickListener {
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.authContainer, AuthFragment())
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+
+    private  val onRegisterClickListener = View.OnClickListener {
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.authContainer, AuthFragment())
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

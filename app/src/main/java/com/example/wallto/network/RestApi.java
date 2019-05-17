@@ -18,8 +18,4 @@ public class RestApi {
         }
         return ourInstance;
     }
-
-    abstract class Test {
-        abstract void Kek();
-    }
 }
