@@ -15,11 +15,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning" android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".ui.auth.AuthActivity"
-                android:theme="@style/AppTheme.Launcher">
+                android:name=".ui.AuthActivity"
+                android:theme="@style/AppTheme.Launcher"
+        android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -1,20 +1,66 @@
 package com.example.wallto.ui
 
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.widget.Toast
+import android.widget.Toolbar
 import com.example.wallto.R
+import com.example.wallto.ui.main.PricesFragment
+import com.example.wallto.ui.main.SettingsFragment
 import com.example.wallto.utils.PrefsHelper
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var btv: BottomNavigationView
+    private lateinit var prefs: SharedPreferences
+    private lateinit var toolbar: android.support.v7.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        btv = findViewById(R.id.bottom_navigation)
+        btv.setOnNavigationItemSelectedListener(navListener)
 
-        Toast.makeText(this@MainActivity, prefs.getString(PrefsHelper.TOKEN, ""), Toast.LENGTH_SHORT).show()
+        // Поддержка тулбара
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.hide()
+    }
+
+    private val navListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        lateinit var selectedFragment: Fragment
+        when (it.itemId) {
+            R.id.nav_home -> {
+                supportActionBar!!.hide()
+                selectedFragment = SettingsFragment()
+            }
+            R.id.nav_wallets -> {
+                supportActionBar!!.show()
+                supportActionBar!!.title = "Счета"
+                selectedFragment = SettingsFragment()
+            }
+            R.id.nav_charts -> {
+                supportActionBar!!.show()
+                supportActionBar!!.title = "Курсы"
+                selectedFragment = PricesFragment()
+            }
+            R.id.nav_settings -> {
+                supportActionBar!!.show()
+                supportActionBar!!.title = "Настройки"
+                selectedFragment = SettingsFragment()
+            }
+        }
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainContainer, selectedFragment)
+            .commit()
+
+        true
     }
 }

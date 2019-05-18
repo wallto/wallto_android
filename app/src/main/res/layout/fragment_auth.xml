@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
                                              android:layout_height="match_parent">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="@string/auth3"
+              android:text="@string/auth"
               android:textAlignment="center"
               android:textSize="24sp"
               android:id="@+id/textView2" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
               android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintHorizontal_bias="0.497"
-              android:textColor="@color/colorPrimaryDark" android:layout_marginTop="15dp"
+              android:textColor="@color/colorPrimaryText" android:layout_marginTop="24dp"
               app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+
     <EditText android:layout_width="match_parent" android:layout_height="50dp"
               android:hint="@string/login"
               android:id="@+id/etLogin"
@@ -20,13 +22,13 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               android:layout_marginStart="8dp"
-              android:autofillHints="login" android:drawableLeft="@drawable/ic_user"
+              android:autofillHints="login" android:drawableStart="@drawable/ic_user"
               android:background="@drawable/edit_radius"
-              android:paddingLeft="10dp"
+              android:paddingStart="15dp"
               android:drawablePadding="10dp"
               app:layout_constraintHorizontal_bias="0.0"
-              android:layout_marginEnd="8dp" android:layout_marginTop="140dp"
-              app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+              android:layout_marginEnd="8dp"
+              android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/etPassword"/>
 
     <EditText android:layout_width="match_parent"
               android:layout_height="50dp"
@@ -39,12 +41,13 @@
               android:layout_marginEnd="8dp"
               android:layout_marginStart="8dp"
               android:autofillHints="password"
-              app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="15dp"
-              app:layout_constraintTop_toBottomOf="@+id/etLogin" android:background="@drawable/edit_radius"
-              android:drawableLeft="@drawable/ic_key"
-              android:paddingLeft="10dp"
+              app:layout_constraintHorizontal_bias="0.0"
+              android:background="@drawable/edit_radius"
+              android:drawableStart="@drawable/ic_key"
+              android:paddingStart="15dp"
               android:drawablePadding="10dp"
-              style="@style/Widget.AppCompat.AutoCompleteTextView"    />
+              style="@style/Widget.AppCompat.AutoCompleteTextView" app:layout_constraintBottom_toTopOf="@+id/btnEnter"
+              android:layout_marginBottom="16dp"/>
 
 
     <Button

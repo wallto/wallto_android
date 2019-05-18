@@ -81,6 +81,7 @@ class AuthFragment : Fragment() {
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val ed = prefs.edit()
         ed.putString(PrefsHelper.TOKEN, user.user_token)
+        ed.putString(PrefsHelper.LOGIN, login.text.toString())
         ed.apply()
 
         val intent = Intent(context, MainActivity::class.java)

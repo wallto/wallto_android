@@ -1,4 +1,4 @@
-package com.example.wallto.ui.auth
+package com.example.wallto.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,12 +6,11 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.widget.Toast
 import com.example.wallto.R
 import com.example.wallto.model.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
-import com.example.wallto.ui.MainActivity
+import com.example.wallto.ui.auth.StartFragment
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
@@ -20,8 +19,6 @@ import io.reactivex.schedulers.Schedulers
 class AuthActivity : AppCompatActivity() {
     private lateinit var tokenService: TokenService
     private lateinit var prefs: SharedPreferences
-    private var isUserSignIn: Boolean = false
-    private lateinit var userInfo: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
