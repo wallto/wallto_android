@@ -12,6 +12,7 @@ import com.example.wallto.R
 import com.example.wallto.ui.main.PricesFragment
 import com.example.wallto.ui.main.SettingsFragment
 import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PricesSingle
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btv: BottomNavigationView
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_charts -> {
                 supportActionBar!!.show()
                 supportActionBar!!.title = "Курсы"
-                selectedFragment = PricesFragment()
+                selectedFragment = PricesSingle.instance
             }
             R.id.nav_settings -> {
                 supportActionBar!!.show()

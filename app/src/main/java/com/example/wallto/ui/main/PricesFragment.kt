@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import carbon.widget.ExpandableRecyclerView
 import carbon.widget.RecyclerView
@@ -25,6 +26,7 @@ import io.reactivex.schedulers.Schedulers
 
 class PricesFragment : Fragment() {
     private lateinit var swipe: SwipeRefreshLayout
+    private lateinit var progress: ProgressBar
     private lateinit var infoService: InfoService
     private lateinit var recyclerView: android.support.v7.widget.RecyclerView
 
@@ -36,6 +38,9 @@ class PricesFragment : Fragment() {
 
         recyclerView = v.findViewById(R.id.recyclerPrices)
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        progress = v.findViewById(R.id.progressPrices)
+        progress.visibility = ProgressBar.VISIBLE
 
         swipe = v.findViewById(R.id.swipePrices)
         swipe.setOnRefreshListener {
@@ -62,6 +67,7 @@ class PricesFragment : Fragment() {
 //                    prices.add(t.ltc)
                     displayData(prices)
                     swipe.isRefreshing = false
+                    progress.visibility = ProgressBar.INVISIBLE
                 }
 
                 override fun onError(e: Throwable) {
