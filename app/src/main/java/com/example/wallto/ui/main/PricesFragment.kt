@@ -14,6 +14,7 @@ import carbon.widget.RecyclerView
 import com.example.wallto.R
 import com.example.wallto.model.Currency
 import com.example.wallto.model.PriceResponse
+import com.example.wallto.network.PriceApi
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.network.services.InfoService
@@ -30,7 +31,7 @@ class PricesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_prices, container, false)
 
-        val retrofit = RestApi.getInstance()
+        val retrofit = PriceApi.getInstance()
         infoService = retrofit.create(InfoService::class.java)
 
         recyclerView = v.findViewById(R.id.recyclerPrices)
@@ -39,7 +40,6 @@ class PricesFragment : Fragment() {
         swipe = v.findViewById(R.id.swipePrices)
         swipe.setOnRefreshListener {
             addItems()
-            //swipe.isRefreshing = false
         }
 
         addItems()
@@ -49,14 +49,17 @@ class PricesFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun addItems() {
-        infoService.getPrices("gnomes")
+        infoService.prices
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<PriceResponse>() {
-                override fun onSuccess(t: PriceResponse) {
+            .subscribe(object : DisposableSingleObserver<ArrayList<Currency>>() {
+                override fun onSuccess(t: ArrayList<Currency>) {
                     val prices = ArrayList<Currency>()
-                    prices.add(t.btc)
-                    prices.add(t.ltc)
+                    for (i in 0..5) {
+                        prices.add(t[i])
+                    }
+//                    prices.add(t.btc)
+//                    prices.add(t.ltc)
                     displayData(prices)
                     swipe.isRefreshing = false
                 }

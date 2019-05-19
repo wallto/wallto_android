@@ -1,7 +1,9 @@
 package com.example.wallto.ui.main.pricelist
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.media.Image
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -21,6 +23,10 @@ class PriceHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SetTextI18n")
     fun bind(currency: Currency) {
         val decimalFormat = DecimalFormat("##0.00")
+        if (currency.percent_change_24h!!.substring(0, 1) == "-") {
+            percent.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorRed))
+            percent.setBackgroundResource(R.drawable.shape_redlight)
+        }
 
         name.text = currency.name
         symbol.text = currency.symbol
@@ -29,7 +35,7 @@ class PriceHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         image.setImageDrawable(
             image.context.getDrawable(
                 image.context.resources.getIdentifier(
-                    currency.id, "drawable", image.context.packageName
+                    currency.symbol!!.toLowerCase(), "drawable", image.context.packageName
                 )
             )
         )

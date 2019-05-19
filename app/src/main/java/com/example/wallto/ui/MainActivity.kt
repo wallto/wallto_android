@@ -25,11 +25,30 @@ class MainActivity : AppCompatActivity() {
 
         btv = findViewById(R.id.bottom_navigation)
         btv.setOnNavigationItemSelectedListener(navListener)
+        btv.setOnNavigationItemReselectedListener(navReListener)
 
         // Поддержка тулбара
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.hide()
+    }
+
+    private val navReListener = BottomNavigationView.OnNavigationItemReselectedListener {
+        //TODO Обработка действий на перевыбранный пункт меню
+        when (it.itemId) {
+            R.id.nav_home -> {
+
+            }
+            R.id.nav_wallets -> {
+
+            }
+            R.id.nav_charts -> {
+
+            }
+            R.id.nav_settings -> {
+
+            }
+        }
     }
 
     private val navListener = BottomNavigationView.OnNavigationItemSelectedListener {

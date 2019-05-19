@@ -8,4 +8,6 @@
     <color name="colorLightPurple">#f9f8ff</color>
     <color name="colorGreen">#00b28f</color>
     <color name="colorGreenLight">#c7efe4</color>
+    <color name="colorRed">#de5457</color>
+    <color name="colorRedLight">#f9d2d8</color>
 </resources>

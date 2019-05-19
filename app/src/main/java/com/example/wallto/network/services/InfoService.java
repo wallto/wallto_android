@@ -10,6 +10,6 @@ import retrofit2.http.Query;
 import java.util.ArrayList;
 
 public interface InfoService {
-    @GET("price")
-    Single<PriceResponse> getPrices(@Query("app") String app);
+    @GET("v1/ticker")
+    Single<ArrayList<Currency>> getPrices();
 }
