@@ -6,18 +6,15 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.widget.Toast
-import android.widget.Toolbar
 import com.example.wallto.R
 import com.example.wallto.ui.main.PricesFragment
 import com.example.wallto.ui.main.SettingsFragment
-import com.example.wallto.utils.PrefsHelper
-import com.example.wallto.utils.PricesSingle
+import com.example.wallto.ui.main.WalletsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btv: BottomNavigationView
     private lateinit var prefs: SharedPreferences
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    lateinit var toolbar: android.support.v7.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +59,12 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_wallets -> {
                 supportActionBar!!.show()
                 supportActionBar!!.title = "Счета"
-                selectedFragment = SettingsFragment()
+                selectedFragment = WalletsFragment()
             }
             R.id.nav_charts -> {
                 supportActionBar!!.show()
                 supportActionBar!!.title = "Курсы"
-                selectedFragment = PricesSingle.instance
+                selectedFragment = PricesFragment()
             }
             R.id.nav_settings -> {
                 supportActionBar!!.show()

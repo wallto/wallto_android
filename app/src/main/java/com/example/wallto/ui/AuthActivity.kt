@@ -3,9 +3,11 @@ package com.example.wallto.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.widget.ProgressBar
 import com.example.wallto.R
 import com.example.wallto.model.User
 import com.example.wallto.network.RestApi

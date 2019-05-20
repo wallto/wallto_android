@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="5dp"
+        android:background="@drawable/shape_white"
+        android:elevation="2dp"
+>
+    <ImageView android:layout_width="38dp" android:layout_height="38dp"
+               app:srcCompat="@drawable/btc"
+               android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
+               android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+               android:id="@+id/ivIcon"/>
+
+    <android.support.constraint.ConstraintLayout android:layout_width="wrap_content"
+                                                 android:layout_height="wrap_content"
+                                                 app:layout_constraintStart_toEndOf="@+id/ivIcon"
+                                                 android:layout_marginStart="16dp"
+                                                 app:layout_constraintTop_toTopOf="parent"
+                                                 app:layout_constraintBottom_toBottomOf="parent"
+                                                 android:id="@+id/constraintLayout">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="BTC"
+                  app:layout_constraintTop_toBottomOf="@+id/tvWalletName"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:id="@+id/tvSymbol"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Bitcoin"
+                  android:maxLength="12"
+                  android:ellipsize="marquee"
+                  android:singleLine="true"
+                  android:textColor="@color/colorPrimaryText"
+                  app:layout_constraintTop_toTopOf="parent" android:id="@+id/tvWalletName"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:fontFamily="@font/montserrat" android:textSize="16sp"/>
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+            android:text="7600$"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPrice"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" android:textSize="16sp"/>
+
+
+</android.support.constraint.ConstraintLayout>

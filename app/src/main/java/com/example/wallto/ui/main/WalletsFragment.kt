@@ -1,7 +1,9 @@
 package com.example.wallto.ui.main
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -10,61 +12,58 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import carbon.widget.ExpandableRecyclerView
-import carbon.widget.RecyclerView
 import com.example.wallto.R
-import com.example.wallto.model.Currency
-import com.example.wallto.model.PriceResponse
-import com.example.wallto.network.PriceApi
+import com.example.wallto.model.Wallet
 import com.example.wallto.network.RestApi
-import com.example.wallto.network.services.AuthService
-import com.example.wallto.network.services.InfoService
-import com.example.wallto.ui.main.pricelist.PriceAdapter
+import com.example.wallto.network.services.WalletService
+import com.example.wallto.ui.main.walletslist.WalletsAdapter
+import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class PricesFragment : Fragment() {
+class WalletsFragment : Fragment() {
     private lateinit var swipe: SwipeRefreshLayout
     private lateinit var progress: ProgressBar
-    private lateinit var infoService: InfoService
+    private lateinit var walletService: WalletService
     private lateinit var recyclerView: android.support.v7.widget.RecyclerView
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_prices, container, false)
+        val v = inflater.inflate(R.layout.fragment_wallets, container, false)
 
-        val retrofit = PriceApi.getInstance()
-        infoService = retrofit.create(InfoService::class.java)
+        prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
-        recyclerView = v.findViewById(R.id.recyclerPrices)
+        val retrofit = RestApi.getInstance()
+        walletService = retrofit.create(WalletService::class.java)
+
+        recyclerView = v.findViewById(R.id.recyclerWallets)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        progress = v.findViewById(R.id.progressPrices)
+        progress = v.findViewById(R.id.progressWallets)
         progress.visibility = ProgressBar.VISIBLE
 
-        swipe = v.findViewById(R.id.swipePrices)
+        swipe = v.findViewById(R.id.swipeWallets)
         swipe.setOnRefreshListener {
             addItems()
         }
 
         addItems()
 
+
+
         return v
     }
 
     @SuppressLint("CheckResult")
     private fun addItems() {
-        infoService.prices
+        walletService.getWallets(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<ArrayList<Currency>>() {
-                override fun onSuccess(t: ArrayList<Currency>) {
-                    if (context != null) {  // Сделано для того, чтобы пресечь попытку записать данные в уничтоженный фрагмент
-                        val prices = ArrayList<Currency>()
-                        for (i in 0..5) {
-                            prices.add(t[i])
-                        }
-                        displayData(prices)
+            .subscribe(object : DisposableSingleObserver<ArrayList<Wallet>>() {
+                override fun onSuccess(t: ArrayList<Wallet>) {
+                    if (context != null) {
+                        displayData(t)
                         swipe.isRefreshing = false
                         progress.visibility = ProgressBar.INVISIBLE
                     }
@@ -72,13 +71,14 @@ class PricesFragment : Fragment() {
 
                 override fun onError(e: Throwable) {
                     Toast.makeText(context, "Ошибка при загрузке: " + e.message, Toast.LENGTH_SHORT).show()
+                    System.out.println("Ошибка wallets: " + e.message)
                 }
 
             })
     }
 
-    private fun displayData(prices: ArrayList<Currency>) {
-        val adapter = PriceAdapter(prices, context!!)
+    private fun displayData(t: ArrayList<Wallet>) {
+        val adapter = WalletsAdapter(t, context!!, fragmentManager)
         recyclerView.adapter = adapter
     }
 }

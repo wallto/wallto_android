@@ -16,4 +16,8 @@ public interface AuthService {
     Single<User> signUp(@Query("login") String login,
                         @Query("password") String password,
                         @Query("app") String app);
+
+    @GET("logout")
+    Single<User> logOut(@Query("utoken") String token,
+                        @Query("app") String app);
 }
