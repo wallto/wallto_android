@@ -12,9 +12,13 @@ import com.example.wallto.R
 import com.example.wallto.ui.MainActivity
 
 class ConcreteWalletFragment : Fragment() {
+    private lateinit var title: TextView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_concrete_wallet, container, false)
-        val string = arguments!!.getString("key")
+        val string = arguments!!.getString("title")
+        title = v.findViewById(R.id.tvTitle)
+        title.text = string
 
         return v
     }

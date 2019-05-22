@@ -22,7 +22,7 @@ class WalletHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     @SuppressLint("SetTextI18n")
     fun bind(wallet: Wallet) {
-        val decimalFormat = DecimalFormat("##0.00")
+//        val decimalFormat = DecimalFormat("##0.00")
 
         name.text = wallet.title
         symbol.text = wallet.type!!.toUpperCase()

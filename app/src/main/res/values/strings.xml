@@ -17,4 +17,11 @@
     <string name="password">Пароль</string>
     <string name="password2">Повторите пароль</string>
     <string name="welcome">Добро пожаловать!</string>
+    <string name="stg_protect">Защита приложения</string>
+    <string name="stg_pinenter">Вход по ПИН-коду</string>
+    <string name="stg_finger">Использовать отпечаток</string>
+    <string name="stg_changepin">Изменить ПИН-код</string>
+    <string name="stg_data">Данные</string>
+    <string name="stg_login">Имя пользователя</string>
+    <string name="stg_mail">Почта</string>
 </resources>

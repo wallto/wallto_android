@@ -15,7 +15,6 @@
     <EditText android:layout_width="match_parent" android:layout_height="50dp"
               android:hint="@string/login"
               android:id="@+id/etLogin"
-              android:radius="5dp"
               android:inputType="text"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"

@@ -31,8 +31,7 @@
                   android:text="Bitcoin"
                   android:textColor="@color/colorPrimaryText"
                   app:layout_constraintTop_toTopOf="parent" android:id="@+id/tvName"
-                  app:layout_constraintStart_toStartOf="parent"
-                  android:fontFamily="@font/montserrat" android:textSize="16sp"/>
+                  app:layout_constraintStart_toStartOf="parent" android:textSize="16sp"/>
     </android.support.constraint.ConstraintLayout>
     <TextView
             android:text="2%"

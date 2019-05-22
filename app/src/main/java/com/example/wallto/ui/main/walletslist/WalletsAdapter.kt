@@ -30,7 +30,8 @@ class WalletsAdapter(
             val wallet = wallets[position]
             val fragment = ConcreteWalletFragment()
             val args = Bundle()
-            args.putString("key", wallet.title)
+            args.putString("title", wallet.title)
+            args.putInt("id", wallet.id!!)
             fragment.arguments = args
 
             fragmentManager
