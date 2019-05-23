@@ -32,6 +32,8 @@ class WalletsAdapter(
             val args = Bundle()
             args.putString("title", wallet.title)
             args.putInt("id", wallet.id!!)
+            args.putString("balance", wallet.balance)
+            args.putString("type", wallet.type)
             fragment.arguments = args
 
             fragmentManager

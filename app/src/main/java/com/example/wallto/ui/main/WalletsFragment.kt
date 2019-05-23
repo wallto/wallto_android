@@ -16,6 +16,7 @@ import com.example.wallto.R
 import com.example.wallto.model.Wallet
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.WalletService
+import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.main.walletslist.WalletsAdapter
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,6 +54,13 @@ class WalletsFragment : Fragment() {
 
 
         return v
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val act = activity as MainActivity
+        act.supportActionBar!!.show()
+        act.supportActionBar!!.title = "Счета"
     }
 
     @SuppressLint("CheckResult")

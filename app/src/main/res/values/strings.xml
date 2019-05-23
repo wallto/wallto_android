@@ -24,4 +24,9 @@
     <string name="stg_data">Данные</string>
     <string name="stg_login">Имя пользователя</string>
     <string name="stg_mail">Почта</string>
+    <string name="net_error">Возникли проблемы с подключением. Убедитесь, что вы имеете доступ к сети.</string>
+    <string name="btn_logout">Выйти</string>
+    <string name="btn_support">Помощь</string>
+    <string name="stg_app">Приложение</string>
+    <string name="no_history">История пуста</string>
 </resources>

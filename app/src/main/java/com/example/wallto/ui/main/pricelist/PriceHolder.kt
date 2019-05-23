@@ -1,8 +1,6 @@
 package com.example.wallto.ui.main.pricelist
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.media.Image
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -11,13 +9,12 @@ import android.widget.TextView
 import com.example.wallto.R
 import com.example.wallto.model.Currency
 import java.text.DecimalFormat
-import java.util.*
 
 class PriceHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var image: ImageView = itemView.findViewById(R.id.ivIcon)
     private var name: TextView = itemView.findViewById(R.id.tvName)
     private var symbol: TextView = itemView.findViewById(R.id.tvSymbol)
-    private var price: TextView = itemView.findViewById(R.id.tvPrice)
+    private var price: TextView = itemView.findViewById(R.id.tvBalance)
     private var percent: TextView = itemView.findViewById(R.id.tvPercent)
 
     @SuppressLint("SetTextI18n")

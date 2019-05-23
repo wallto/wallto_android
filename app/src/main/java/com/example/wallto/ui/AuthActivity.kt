@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.example.wallto.R
 import com.example.wallto.model.User
 import com.example.wallto.network.RestApi
@@ -21,19 +22,25 @@ import io.reactivex.schedulers.Schedulers
 class AuthActivity : AppCompatActivity() {
     private lateinit var tokenService: TokenService
     private lateinit var prefs: SharedPreferences
+    private lateinit var progressBar: ProgressBar
+    private lateinit var error: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_auth)
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        progressBar = findViewById(R.id.progressAuth)
+        error = findViewById(R.id.tvError)
+
         if (prefs.getString(PrefsHelper.TOKEN, "") != "") {
+            progressBar.visibility = ProgressBar.VISIBLE
+
             // Получает запрос список запросов для работы с токеном
             val retrofit = RestApi.getInstance()
             tokenService = retrofit.create(TokenService::class.java)
             checkTokenValid()
         } else {
-            setContentView(R.layout.activity_auth)
-
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.authContainer, StartFragment())
@@ -78,6 +85,7 @@ class AuthActivity : AppCompatActivity() {
 
                 override fun onError(e: Throwable) {
                     System.out.println("Refresh error: " + e.message)
+                    error.text = applicationContext.getString(R.string.net_error)
                 }
             })
     }
