@@ -12,8 +12,8 @@
     <string name="send">Отправить</string>
     <string name="auth2">Войти</string>
     <string name="auth3">Войти в аккаунт</string>
-    <string name="go_back"> Назад</string>
-    <string name="login">Логин</string>
+    <string name="go_back">Назад</string>
+    <string name="login">Электронная почта</string>
     <string name="password">Пароль</string>
     <string name="password2">Повторите пароль</string>
     <string name="welcome">Добро пожаловать!</string>
@@ -29,4 +29,5 @@
     <string name="btn_support">Помощь</string>
     <string name="stg_app">Приложение</string>
     <string name="no_history">История пуста</string>
+    <string name="pin">Введите PIN</string>
 </resources>

@@ -52,7 +52,8 @@
 
     <Button
             android:text="@string/auth2"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/shape_purple"
+            android:foreground="?attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

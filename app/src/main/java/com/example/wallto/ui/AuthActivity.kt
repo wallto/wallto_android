@@ -48,10 +48,6 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-//TODO Здесь нужно будет сделать так, чтобы при отрицательном тесте на валидность
-//     он перебрасывал нас на активити с вводом PIN-кода или отпечатка пальцев.
-//     Пока что он заходит сразу на главную
-
     @SuppressLint("CheckResult")
     private fun checkTokenValid() {
         tokenService.checkValid(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
@@ -67,7 +63,13 @@ class AuthActivity : AppCompatActivity() {
 
                 override fun onError(e: Throwable) {
                     System.out.println("Ошибка cvt: " + e.message)
-                    refreshToken()
+                    if (prefs.getString(PrefsHelper.PIN, "") == "") {
+                        refreshToken()
+                    } else {
+                        val intent = Intent(this@AuthActivity, PinCodeActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
                 }
             })
     }

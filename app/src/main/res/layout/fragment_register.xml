@@ -65,7 +65,8 @@
 
     <Button
             android:text="@string/send"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/shape_purple"
+            android:foreground="?attr/selectableItemBackground"
             android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,18 +76,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintHorizontal_bias="0.0"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/btnEnter"/>
-    <Button
-            android:text="@string/go_back"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-              android:textColor="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnEnter" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.0"
-
-            android:layout_marginBottom="24dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
             android:layout_width="141dp"
             android:layout_height="89dp" app:srcCompat="@drawable/ic_logo_purple"

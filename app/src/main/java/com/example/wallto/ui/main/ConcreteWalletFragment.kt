@@ -1,10 +1,14 @@
 package com.example.wallto.ui.main
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +43,8 @@ class ConcreteWalletFragment : Fragment() {
     private lateinit var recyclerView: android.support.v7.widget.RecyclerView
     private lateinit var prefs: SharedPreferences
 
+    private var addressToClip: String = ""
+
 
     private var id: Int? = null
 
@@ -64,7 +70,7 @@ class ConcreteWalletFragment : Fragment() {
         title.text = titleString
 
         balance = v.findViewById(R.id.tvBalance)
-        balance.text = "$balanceString ${typeString.toUpperCase()}"
+        balance.text = "$balanceString ${typeString!!.toUpperCase()}"
 
         barcode = v.findViewById(R.id.ivBarcode)
         address = v.findViewById(R.id.tvAddress)
@@ -82,6 +88,9 @@ class ConcreteWalletFragment : Fragment() {
     }
 
     private val onAddressLongClickListener = View.OnLongClickListener {
+        val clipboard = getSystemService(context!!, ClipboardManager::class.java)
+        val clip = ClipData.newPlainText("Address", addressToClip)
+        clipboard!!.primaryClip = clip
         Toast.makeText(context, "Скопировано в буфер", Toast.LENGTH_SHORT).show()
         true
     }
@@ -96,6 +105,7 @@ class ConcreteWalletFragment : Fragment() {
                     if (context != null) {
                         address.visibility = TextView.VISIBLE
                         address.text = t.address
+                        addressToClip = t.address!!
                         paintBarcode(t.address)
                         progressAddress.visibility = ProgressBar.GONE
                     }

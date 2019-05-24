@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.hide()
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainContainer, WalletsFragment())
+            .commit()
     }
 
     private val navReListener = BottomNavigationView.OnNavigationItemReselectedListener {
