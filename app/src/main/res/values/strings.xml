@@ -2,7 +2,7 @@
     <string name="app_name">Wallto</string>
     <string name="auth">Авторизация</string>
     <string name="create_new">Создать новый аккаунт</string>
-    <string name="start_screen_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</string>
+    <string name="start_screen_desc">Уберечь свои деньги стоит больших трудов, чем добыть их</string>
     <string name="nav_home">Главная</string>
     <string name="nav_wallets">Счета</string>
     <string name="nav_charts">Курсы</string>

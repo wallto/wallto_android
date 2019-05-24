@@ -84,7 +84,14 @@ class WalletsFragment : Fragment() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Toast.makeText(context, "Ошибка при загрузке: " + e.message, Toast.LENGTH_SHORT).show()
+                    if (prefs.getString(PrefsHelper.PIN, "") == "") {
+                        refreshToken()
+                    } else {
+                        val intent = Intent(context, PinCodeActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
+//                    Toast.makeText(context, "Ошибка при загрузке: " + e.message, Toast.LENGTH_SHORT).show()
                     System.out.println("Ошибка wallets: " + e.message)
                 }
 

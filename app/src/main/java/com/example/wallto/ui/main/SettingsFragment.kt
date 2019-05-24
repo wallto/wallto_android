@@ -12,6 +12,8 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import com.example.wallto.R
@@ -19,6 +21,7 @@ import com.example.wallto.model.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.AuthActivity
+import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
@@ -28,6 +31,9 @@ class SettingsFragment : Fragment() {
 
     private lateinit var btnLogout: TextView
     private lateinit var btnSupport: TextView
+    private lateinit var btnChangePin: TextView
+
+    private lateinit var switchPin: Switch
 
     private lateinit var version: TextView
     private lateinit var username: TextView
@@ -52,7 +58,39 @@ class SettingsFragment : Fragment() {
         btnLogout = v.findViewById(R.id.btnLogout)
         btnLogout.setOnClickListener(onLogoutClickListener)
 
+        btnChangePin = v.findViewById(R.id.btnChangePin)
+        btnChangePin.setOnClickListener(onChangePinClickListener)
+
+        // Убрать или добавить пин код
+        switchPin = v.findViewById(R.id.switchPin)
+        if (prefs.getString(PrefsHelper.PIN, "") != "") switchPin.isChecked = true
+        switchPin.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val intent = Intent(context, PinCodeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.putExtra("ACT", "NEW")
+                startActivity(intent)
+            } else {
+                val intent = Intent(context, PinCodeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.putExtra("ACT", "CANCEL")
+                startActivity(intent)
+            }
+
+        }
+
         return v
+    }
+
+    private val onChangePinClickListener = View.OnClickListener {
+        if (prefs.getString(PrefsHelper.PIN, "") != "") {
+            val intent = Intent(context, PinCodeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("ACT", "CHANGE")
+            startActivity(intent)
+        } else {
+            Toast.makeText(context, "Вы не используете PIN", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private val onLogoutClickListener = View.OnClickListener {
@@ -86,6 +124,7 @@ class SettingsFragment : Fragment() {
 
     private fun showPersonalData() {
         username.text = prefs.getString(PrefsHelper.LOGIN, "")
+        email.text = prefs.getString(PrefsHelper.LOGIN, "")
     }
 
     private fun showVersion() {

@@ -21,20 +21,32 @@ import kotlinx.android.synthetic.main.fragment_start.view.*
 
 class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
     private var circleCount: Int = 1
+    private var isPinAgain: Boolean = false
     private var pin: String = ""
     private lateinit var prefs: SharedPreferences
     private lateinit var tokenService: TokenService
 
+    private var action: String = ""
+
+    private lateinit var desc: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_code)
+
+        desc = findViewById(R.id.tvPinDesc)
+
+        val bundle = intent.extras
+        if (bundle?.getString("ACT") != null) {
+            action = bundle.getString("ACT")!!
+        }
+
+        changeDesc()
+
         val retrofit = RestApi.getInstance()
         tokenService = retrofit.create(TokenService::class.java)
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val e = prefs.edit()
-        e.putString(PrefsHelper.PIN, "1488")
-        e.apply()
 
         tvNum0.setOnClickListener(this)
         tvNum1.setOnClickListener(this)
@@ -48,6 +60,17 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
         tvNum9.setOnClickListener(this)
         ibBack.setOnClickListener(onBackClickListener)
     }
+
+    private fun changeDesc() {
+
+        when (action) {
+            "CHANGE" -> desc.text = "Введите старый PIN"
+            "NEW" -> desc.text = "Придумайте PIN"
+            "CANCEL" -> desc.text = "Сначала введите старый PIN"
+        }
+
+    }
+
     private val onBackClickListener = View.OnClickListener {
         if (circleCount > 1) {
             deletePin()
@@ -91,12 +114,63 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    //TODO Требуется рефакторинг
+
     private fun checkPinValid() {
-        if (pin == prefs.getString(PrefsHelper.PIN, "")) {
-            Toast.makeText(this, "Пожилой успех", Toast.LENGTH_SHORT).show()
-            refreshToken()
-        } else {
-            deletePin()
+        when (action) {
+            "NEW" -> {
+                Toast.makeText(this, "Теперь ваш кошелек защищен PIN-кодом", Toast.LENGTH_SHORT).show()
+                val e = prefs.edit()
+                e.putString(PrefsHelper.PIN, pin)
+                e.apply()
+                successAuth()
+            }
+            "CANCEL" -> {
+                if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                    Toast.makeText(this, "PIN-код удален", Toast.LENGTH_SHORT).show()
+                    val e = prefs.edit()
+                    e.putString(PrefsHelper.PIN, "")
+                    e.apply()
+                    successAuth()
+                } else {
+                    Toast.makeText(this, "Неверный PIN-код", Toast.LENGTH_SHORT).show()
+                    deletePin()
+                }
+            }
+            "CHANGE" -> {
+                when {
+                    isPinAgain -> {
+                        if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                            Toast.makeText(this, "Вы ввели старый PIN", Toast.LENGTH_SHORT).show()
+                            deletePin()
+                        } else {
+                            Toast.makeText(this, "Вы успешно изменили PIN-код", Toast.LENGTH_SHORT).show()
+                            val e = prefs.edit()
+                            e.putString(PrefsHelper.PIN, pin)
+                            e.apply()
+                            successAuth()
+                        }
+                    }
+                    pin == prefs.getString(PrefsHelper.PIN, "") -> {
+                        desc.text = "Придумайте новый PIN"
+                        Toast.makeText(this, "PIN-код введен верно, можете ввести новый", Toast.LENGTH_SHORT).show()
+                        deletePin()
+                        isPinAgain = true
+                    }
+                    else -> {
+                        Toast.makeText(this, "Неверный PIN-код", Toast.LENGTH_SHORT).show()
+                        deletePin()
+                    }
+                }
+            }
+            else -> {
+                if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                    refreshToken()
+                } else {
+                    Toast.makeText(this, "Неверный PIN-код", Toast.LENGTH_SHORT).show()
+                    deletePin()
+                }
+            }
         }
     }
 
