@@ -19,6 +19,7 @@ import com.example.wallto.network.PriceApi
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.network.services.InfoService
+import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.main.pricelist.PriceAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
@@ -50,6 +51,13 @@ class PricesFragment : Fragment() {
         addItems()
 
         return v
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val act = activity as MainActivity
+        act.supportActionBar!!.show()
+        act.supportActionBar!!.title = "Курсы"
     }
 
     @SuppressLint("CheckResult")

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import com.example.wallto.R
+import com.example.wallto.ui.main.MainFragment
 import com.example.wallto.ui.main.PricesFragment
 import com.example.wallto.ui.main.SettingsFragment
 import com.example.wallto.ui.main.WalletsFragment
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.mainContainer, WalletsFragment())
+            .replace(R.id.mainContainer, MainFragment())
             .commit()
     }
 
@@ -58,22 +59,15 @@ class MainActivity : AppCompatActivity() {
         lateinit var selectedFragment: Fragment
         when (it.itemId) {
             R.id.nav_home -> {
-                supportActionBar!!.hide()
-                selectedFragment = SettingsFragment()
+                selectedFragment = MainFragment()
             }
             R.id.nav_wallets -> {
-                supportActionBar!!.show()
-                supportActionBar!!.title = "Счета"
                 selectedFragment = WalletsFragment()
             }
             R.id.nav_charts -> {
-                supportActionBar!!.show()
-                supportActionBar!!.title = "Курсы"
                 selectedFragment = PricesFragment()
             }
             R.id.nav_settings -> {
-                supportActionBar!!.show()
-                supportActionBar!!.title = "Настройки"
                 selectedFragment = SettingsFragment()
             }
         }

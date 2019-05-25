@@ -21,6 +21,7 @@ import com.example.wallto.model.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.AuthActivity
+import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -82,6 +83,13 @@ class SettingsFragment : Fragment() {
         return v
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val act = activity as MainActivity
+        act.supportActionBar!!.show()
+        act.supportActionBar!!.title = "Настройки"
+    }
+
     private val onChangePinClickListener = View.OnClickListener {
         if (prefs.getString(PrefsHelper.PIN, "") != "") {
             val intent = Intent(context, PinCodeActivity::class.java)
@@ -123,7 +131,6 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showPersonalData() {
-        username.text = prefs.getString(PrefsHelper.LOGIN, "")
         email.text = prefs.getString(PrefsHelper.LOGIN, "")
     }
 

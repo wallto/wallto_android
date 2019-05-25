@@ -22,7 +22,7 @@
     <string name="stg_finger">Использовать отпечаток</string>
     <string name="stg_changepin">Изменить ПИН-код</string>
     <string name="stg_data">Данные</string>
-    <string name="stg_login">Имя пользователя</string>
+    <string name="stg_login">Статус</string>
     <string name="stg_mail">Почта</string>
     <string name="net_error">Возникли проблемы с подключением. Убедитесь, что вы имеете доступ к сети.</string>
     <string name="btn_logout">Выйти</string>
@@ -30,4 +30,6 @@
     <string name="stg_app">Приложение</string>
     <string name="no_history">История пуста</string>
     <string name="pin">Введите PIN</string>
+    <string name="sum">Сумма (в сатоши)</string>
+    <string name="address">Адрес</string>
 </resources>

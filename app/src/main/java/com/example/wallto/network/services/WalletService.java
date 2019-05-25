@@ -1,9 +1,6 @@
 package com.example.wallto.network.services;
 
-import com.example.wallto.model.BalanceResponse;
-import com.example.wallto.model.History;
-import com.example.wallto.model.User;
-import com.example.wallto.model.Wallet;
+import com.example.wallto.model.*;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -47,4 +44,11 @@ public interface WalletService {
                            @Query("utoken") String token,
                            @Query("app") String app,
                            @Query("title") String title);
+
+    @GET("send/{wid}")
+    Single<DataResponse> send(@Path("wid") int wid,
+                              @Query("ad") String address,
+                              @Query("va") String value,
+                              @Query("utoken") String token,
+                              @Query("app") String app);
 }
