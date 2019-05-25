@@ -28,7 +28,7 @@
     <string name="btn_logout">Выйти</string>
     <string name="btn_support">Помощь</string>
     <string name="stg_app">Приложение</string>
-    <string name="no_history">История пуста</string>
+    <string name="no_history">История временно недоступна</string>
     <string name="pin">Введите PIN</string>
     <string name="sum">Сумма (в сатоши)</string>
     <string name="address">Адрес</string>

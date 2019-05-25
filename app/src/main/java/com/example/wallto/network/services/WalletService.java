@@ -24,7 +24,7 @@ public interface WalletService {
                              @Query("app") String app);
 
     @GET("history/{wid}")
-    Single<History> getHistory(@Path("wid") int wid,
+    Single<ArrayList<History>> getHistory(@Path("wid") int wid,
                                @Query("utoken") String token,
                                @Query("app") String app);
 
