@@ -81,12 +81,12 @@ class AuthActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
-                    System.out.println("Ответ на extend: " + t.user_token)
+                    println("Ответ на extend: " + t.user_token)
                     updateTokenData(t)
                 }
 
                 override fun onError(e: Throwable) {
-                    System.out.println("Refresh error: " + e.message)
+                    println("Refresh error: " + e.message)
                     error.text = applicationContext.getString(R.string.net_error)
                 }
             })

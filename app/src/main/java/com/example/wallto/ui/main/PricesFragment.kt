@@ -69,7 +69,7 @@ class PricesFragment : Fragment() {
                 override fun onSuccess(t: ArrayList<Currency>) {
                     if (context != null) {  // Сделано для того, чтобы пресечь попытку записать данные в уничтоженный фрагмент
                         val prices = ArrayList<Currency>()
-                        for (i in 0..5) {
+                        for (i in 0..2) {
                             prices.add(t[i])
                         }
                         displayData(prices)

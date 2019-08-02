@@ -8,6 +8,7 @@ import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,8 @@ class WalletsFragment : Fragment() {
     private lateinit var tokenService: TokenService
     private lateinit var recyclerView: android.support.v7.widget.RecyclerView
     private lateinit var prefs: SharedPreferences
+
+    private var TAG = this.javaClass.simpleName
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_wallets, container, false)
@@ -92,7 +95,8 @@ class WalletsFragment : Fragment() {
                         startActivity(intent)
                     }
 //                    Toast.makeText(context, "Ошибка при загрузке: " + e.message, Toast.LENGTH_SHORT).show()
-                    System.out.println("Ошибка wallets: " + e.message)
+//                    System.out.println("Ошибка wallets: " + e.message)
+                    Log.e(TAG, "Ошибка wallets", e)
                 }
 
             })
