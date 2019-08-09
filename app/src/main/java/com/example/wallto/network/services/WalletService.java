@@ -3,6 +3,7 @@ package com.example.wallto.network.services;
 import com.example.wallto.data.*;
 import io.reactivex.Single;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 
 public interface WalletService {
     @GET("wallets")
-    Single<ArrayList<Wallet>> getWallets(@Query("utoken") String token,
-                                         @Query("app") String app);
+    Single<ArrayList<Wallet>> getWallets(@Header("x-access-token") String token,
+                                         @Header("x-api-key") String app);
 
     @GET("balance/{wid}")
     Single<BalanceResponse> getBalance(@Path("wid") int wid,

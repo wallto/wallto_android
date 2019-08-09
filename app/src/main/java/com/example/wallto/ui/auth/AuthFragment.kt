@@ -15,11 +15,13 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.wallto.R
 import com.example.wallto.data.User
+import com.example.wallto.data.body.UserBody
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
@@ -31,6 +33,8 @@ class AuthFragment : Fragment() {
     private lateinit var authService: AuthService
 
     private lateinit var prefs: SharedPreferences
+
+    private var userBody: UserBody = UserBody("login", "password")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_auth, container, false)
@@ -57,7 +61,9 @@ class AuthFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun userAuth() {
-        authService.signIn(login.text.toString(), password.text.toString(), "gnomes")
+        userBody.login = login.text.toString()
+        userBody.password = password.text.toString()
+        authService.signIn("gnomes", userBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {

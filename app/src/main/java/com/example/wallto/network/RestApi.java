@@ -5,7 +5,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApi {
-    private static final String BASE_URL = "https://api.wallto.ru/";
+    private static final String BASE_URL = "https://api.boobster.ru/";
     private static Retrofit ourInstance;
 
     public static Retrofit getInstance() {
