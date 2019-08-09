@@ -7,9 +7,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.model.Wallet
+import com.example.wallto.data.Wallet
 import com.example.wallto.ui.main.ConcreteWalletFragment
 import kotlin.collections.ArrayList
 

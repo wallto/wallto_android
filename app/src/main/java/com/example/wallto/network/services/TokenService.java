@@ -1,6 +1,6 @@
 package com.example.wallto.network.services;
 
-import com.example.wallto.model.User;
+import com.example.wallto.data.User;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

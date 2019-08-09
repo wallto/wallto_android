@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.model.User
+import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import io.reactivex.android.schedulers.AndroidSchedulers

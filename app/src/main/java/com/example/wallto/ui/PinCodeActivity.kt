@@ -1,3 +1,9 @@
+/*
+ * Created by Mark Abramenko on 09.08.19 12:34
+ * Copyright (c) 2019 . All rights reserved.
+ * Last modified 09.08.19 12:26
+ */
+
 package com.example.wallto.ui
 
 import android.content.Intent
@@ -9,7 +15,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.model.User
+import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.utils.PrefsHelper
@@ -17,7 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_pin_code.*
-import kotlinx.android.synthetic.main.fragment_start.view.*
 
 class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
     private var circleCount: Int = 1

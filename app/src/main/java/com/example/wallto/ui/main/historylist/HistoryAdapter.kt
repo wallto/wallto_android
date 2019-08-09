@@ -2,12 +2,11 @@ package com.example.wallto.ui.main.historylist
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.wallto.R
-import com.example.wallto.model.History
+import com.example.wallto.data.History
 import kotlin.collections.ArrayList
 
 class HistoryAdapter(

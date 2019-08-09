@@ -1,4 +1,4 @@
-package com.example.wallto.model
+package com.example.wallto.data
 
 class Wallet (
     var address: String?,

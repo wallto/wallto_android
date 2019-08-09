@@ -13,10 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.model.User
-import com.example.wallto.model.Wallet
+import com.example.wallto.data.User
+import com.example.wallto.data.Wallet
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.network.services.WalletService
@@ -27,7 +26,6 @@ import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import retrofit2.create
 
 class WalletsFragment : Fragment() {
     private lateinit var swipe: SwipeRefreshLayout
@@ -94,9 +92,7 @@ class WalletsFragment : Fragment() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }
-//                    Toast.makeText(context, "Ошибка при загрузке: " + e.message, Toast.LENGTH_SHORT).show()
-//                    System.out.println("Ошибка wallets: " + e.message)
-                    Log.e(TAG, "Ошибка wallets", e)
+                    Log.e(TAG, "Ошибка wallets: ", e)
                 }
 
             })
@@ -109,12 +105,12 @@ class WalletsFragment : Fragment() {
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
                     if (t.message == "ok") {
-                        System.out.println("Токен еще валиден")
+                        Log.e(TAG, "Token is still valid")
                     }
                 }
 
                 override fun onError(e: Throwable) {
-                    System.out.println("Ошибка cvt: " + e.message)
+                    Log.e(TAG, "Ошибка checkTokenValid: ", e)
                     if (prefs.getString(PrefsHelper.PIN, "") == "") {
                         refreshToken()
                     } else {
@@ -132,12 +128,12 @@ class WalletsFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
-                    System.out.println("Ответ на extend: " + t.user_token)
+                    Log.e(TAG, "Ответ на extend: " + t.user_token)
                     updateTokenData(t)
                 }
 
                 override fun onError(e: Throwable) {
-                    System.out.println("Refresh error: " + e.message)
+                    Log.e(TAG, "Ошибка refreshToken: ", e)
                 }
             })
     }

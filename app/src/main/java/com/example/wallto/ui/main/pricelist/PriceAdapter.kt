@@ -5,8 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.wallto.R
-import com.example.wallto.model.Currency
-import java.util.*
+import com.example.wallto.data.Currency
 import kotlin.collections.ArrayList
 
 class PriceAdapter(private var prices: ArrayList<Currency>, private var context: Context) : RecyclerView.Adapter<PriceHolder>() {

@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.wallto.R
-import com.example.wallto.model.Currency
+import com.example.wallto.data.Currency
 import java.text.DecimalFormat
 
 class PriceHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

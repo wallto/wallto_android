@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.wallto.R
-import com.example.wallto.model.Wallet
+import com.example.wallto.data.Wallet
 
 class WalletHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var image: ImageView = itemView.findViewById(R.id.ivIcon)

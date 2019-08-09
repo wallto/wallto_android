@@ -3,14 +3,14 @@ package com.example.wallto.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.wallto.R
-import com.example.wallto.model.User
+import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.ui.auth.StartFragment
@@ -24,6 +24,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
     private lateinit var progressBar: ProgressBar
     private lateinit var error: TextView
+    private var TAG = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
@@ -56,13 +57,13 @@ class AuthActivity : AppCompatActivity() {
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
                     if (t.message == "ok") {
-                        System.out.println("Ответ на cvt: " + t.message)
+                        Log.e(TAG, "Ответ checkTokenValid: " + t.message)
                         successAuth()
                     }
                 }
 
                 override fun onError(e: Throwable) {
-                    System.out.println("Ошибка cvt: " + e.message)
+                    Log.e(TAG, "Ошибка checkTokenValid: ", e)
                     if (prefs.getString(PrefsHelper.PIN, "") == "") {
                         refreshToken()
                     } else {
@@ -81,12 +82,12 @@ class AuthActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
-                    println("Ответ на extend: " + t.user_token)
+                    Log.e(TAG, "Ответ на refreshToken: " + t.user_token)
                     updateTokenData(t)
                 }
 
                 override fun onError(e: Throwable) {
-                    println("Refresh error: " + e.message)
+                    Log.e(TAG, "Refresh error: ", e)
                     error.text = applicationContext.getString(R.string.net_error)
                 }
             })

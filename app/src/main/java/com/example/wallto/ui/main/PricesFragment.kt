@@ -10,14 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import carbon.widget.ExpandableRecyclerView
-import carbon.widget.RecyclerView
 import com.example.wallto.R
-import com.example.wallto.model.Currency
-import com.example.wallto.model.PriceResponse
+import com.example.wallto.data.Currency
 import com.example.wallto.network.PriceApi
-import com.example.wallto.network.RestApi
-import com.example.wallto.network.services.AuthService
 import com.example.wallto.network.services.InfoService
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.main.pricelist.PriceAdapter

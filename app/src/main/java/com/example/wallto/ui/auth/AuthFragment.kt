@@ -14,7 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.model.User
+import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.MainActivity
@@ -22,7 +22,6 @@ import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_auth.*
 
 class AuthFragment : Fragment() {
     private lateinit var login: EditText
