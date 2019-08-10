@@ -1,10 +1,9 @@
 package com.example.wallto.network.services;
 
 import com.example.wallto.data.User;
+import com.example.wallto.data.body.TokenBody;
 import io.reactivex.Single;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 public interface TokenService {
 
@@ -12,8 +11,8 @@ public interface TokenService {
     Single<User> checkValid(@Header("x-access-token") String token,
                             @Header("x-api-key") String app);
 
-    @GET("extend")
-    Single<User> refreshToken(@Header("x-access-token") String token,
+    @POST("extend")
+    Single<User> refreshToken(@Body TokenBody token,
                               @Header("x-api-key") String app);
 
 }

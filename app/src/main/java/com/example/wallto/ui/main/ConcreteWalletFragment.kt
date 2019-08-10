@@ -20,7 +20,7 @@ import com.example.wallto.data.Wallet
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.WalletService
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -134,7 +134,7 @@ class ConcreteWalletFragment : Fragment() {
     }
 
     private fun sendSatoshi() {
-        walletService.send(id!!, sendAddress.text.toString(), sendSum.text.toString(), prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        walletService.send(id!!, sendAddress.text.toString(), sendSum.text.toString(), prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<DataResponse>() {
@@ -160,7 +160,7 @@ class ConcreteWalletFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun getWalletInfo() {
-        walletService.getWallet(id!!, prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        walletService.getWallet(id!!, prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<Wallet>() {

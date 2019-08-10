@@ -19,7 +19,7 @@ import com.example.wallto.data.body.UserBody
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -84,8 +84,8 @@ class AuthFragment : Fragment() {
     private fun successAuth(user: User) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val ed = prefs.edit()
-        ed.putString(PrefsHelper.TOKEN, user.user_token)
-        ed.putString(PrefsHelper.LOGIN, login.text.toString())
+        ed.putString(PrefsRepository.Keys.TOKEN.toString(), user.user_token)
+        ed.putString(PrefsRepository.Keys.LOGIN.toString(), login.text.toString())
         ed.apply()
 
         val intent = Intent(context, MainActivity::class.java)

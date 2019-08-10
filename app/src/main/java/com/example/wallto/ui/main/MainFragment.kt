@@ -14,7 +14,7 @@ import com.example.wallto.R
 import com.example.wallto.network.PriceApi
 import com.example.wallto.network.services.InfoService
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 
 class MainFragment : Fragment() {
     private lateinit var swipe: SwipeRefreshLayout
@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
         infoService = retrofit.create(InfoService::class.java)
 
         login = v.findViewById(R.id.tvLoginMain)
-        login.text = prefs.getString(PrefsHelper.LOGIN, "")
+        login.text = prefs.getString(PrefsRepository.Keys.LOGIN.toString(), "")
 
         return v
     }

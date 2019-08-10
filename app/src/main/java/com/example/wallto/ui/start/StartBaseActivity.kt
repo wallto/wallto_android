@@ -17,11 +17,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.wallto.R
 import com.example.wallto.data.User
+import com.example.wallto.data.body.TokenBody
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -44,7 +45,7 @@ class StartBaseActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressAuth)
         error = findViewById(R.id.tvError)
 
-        if (prefs.getString(PrefsHelper.TOKEN, "") != "") {
+        if (PrefsRepository.getValue(PrefsRepository.Keys.TOKEN.toString()) != "") {
             progressBar.visibility = ProgressBar.VISIBLE
 
             // Получает запрос список запросов для работы с токеном
@@ -61,7 +62,7 @@ class StartBaseActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun checkTokenValid() {
-        tokenService.checkValid(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        tokenService.checkValid(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
@@ -74,7 +75,7 @@ class StartBaseActivity : AppCompatActivity() {
 
                 override fun onError(e: Throwable) {
                     Log.e(TAG, "Ошибка checkTokenValid: ", e)
-                    if (prefs.getString(PrefsHelper.PIN, "") == "") {
+                    if (prefs.getString(PrefsRepository.Keys.PIN.toString(), "") == "") {
                         refreshToken()
                     } else {
                         val intent = Intent(this@StartBaseActivity, PinCodeActivity::class.java)
@@ -87,7 +88,8 @@ class StartBaseActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun refreshToken() {
-        tokenService.refreshToken(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        val tokenBody = TokenBody(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""))
+        tokenService.refreshToken(tokenBody, "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
@@ -105,7 +107,7 @@ class StartBaseActivity : AppCompatActivity() {
 
     private fun updateTokenData(user: User) {
         val ed = prefs.edit()
-        ed.putString(PrefsHelper.TOKEN, user.user_token)
+        ed.putString(PrefsRepository.Keys.TOKEN.toString(), user.user_token)
         ed.apply()
         successAuth()
     }

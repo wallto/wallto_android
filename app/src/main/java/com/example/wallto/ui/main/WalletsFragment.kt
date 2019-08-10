@@ -16,13 +16,14 @@ import android.widget.ProgressBar
 import com.example.wallto.R
 import com.example.wallto.data.User
 import com.example.wallto.data.Wallet
+import com.example.wallto.data.body.TokenBody
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.network.services.WalletService
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.ui.main.walletslist.WalletsAdapter
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -71,7 +72,7 @@ class WalletsFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun addItems() {
-        walletService.getWallets(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        walletService.getWallets(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<ArrayList<Wallet>>() {
@@ -85,7 +86,7 @@ class WalletsFragment : Fragment() {
                 }
 
                 override fun onError(e: Throwable) {
-                    if (prefs.getString(PrefsHelper.PIN, "") == "") {
+                    if (prefs.getString(PrefsRepository.Keys.PIN.toString(), "") == "") {
                         refreshToken()
                     } else {
                         val intent = Intent(context, PinCodeActivity::class.java)
@@ -99,7 +100,7 @@ class WalletsFragment : Fragment() {
     }
 
     private fun checkTokenValid() {
-        tokenService.checkValid(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        tokenService.checkValid(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
@@ -111,7 +112,7 @@ class WalletsFragment : Fragment() {
 
                 override fun onError(e: Throwable) {
                     Log.e(TAG, "Ошибка checkTokenValid: ", e)
-                    if (prefs.getString(PrefsHelper.PIN, "") == "") {
+                    if (prefs.getString(PrefsRepository.Keys.PIN.toString(), "") == "") {
                         refreshToken()
                     } else {
                         val intent = Intent(context, PinCodeActivity::class.java)
@@ -123,7 +124,8 @@ class WalletsFragment : Fragment() {
     }
 
     private fun refreshToken() {
-        tokenService.refreshToken(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        val tokenBody = TokenBody(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""))
+        tokenService.refreshToken(tokenBody, "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
@@ -140,7 +142,7 @@ class WalletsFragment : Fragment() {
 
     private fun updateTokenData(user: User) {
         val ed = prefs.edit()
-        ed.putString(PrefsHelper.TOKEN, user.user_token)
+        ed.putString(PrefsRepository.Keys.TOKEN.toString(), user.user_token)
         ed.apply()
     }
 

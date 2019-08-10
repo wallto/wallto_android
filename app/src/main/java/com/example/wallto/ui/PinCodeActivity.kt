@@ -16,9 +16,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.wallto.R
 import com.example.wallto.data.User
+import com.example.wallto.data.body.TokenBody
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -126,15 +127,15 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
             "NEW" -> {
                 Toast.makeText(this, "Теперь ваш кошелек защищен PIN-кодом", Toast.LENGTH_SHORT).show()
                 val e = prefs.edit()
-                e.putString(PrefsHelper.PIN, pin)
+                e.putString(PrefsRepository.Keys.PIN.toString(), pin)
                 e.apply()
                 successAuth()
             }
             "CANCEL" -> {
-                if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                if (pin == prefs.getString(PrefsRepository.Keys.PIN.toString(), "")) {
                     Toast.makeText(this, "PIN-код удален", Toast.LENGTH_SHORT).show()
                     val e = prefs.edit()
-                    e.putString(PrefsHelper.PIN, "")
+                    e.putString(PrefsRepository.Keys.PIN.toString(), "")
                     e.apply()
                     successAuth()
                 } else {
@@ -145,18 +146,18 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
             "CHANGE" -> {
                 when {
                     isPinAgain -> {
-                        if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                        if (pin == prefs.getString(PrefsRepository.Keys.PIN.toString(), "")) {
                             Toast.makeText(this, "Вы ввели старый PIN", Toast.LENGTH_SHORT).show()
                             deletePin()
                         } else {
                             Toast.makeText(this, "Вы успешно изменили PIN-код", Toast.LENGTH_SHORT).show()
                             val e = prefs.edit()
-                            e.putString(PrefsHelper.PIN, pin)
+                            e.putString(PrefsRepository.Keys.PIN.toString(), pin)
                             e.apply()
                             successAuth()
                         }
                     }
-                    pin == prefs.getString(PrefsHelper.PIN, "") -> {
+                    pin == prefs.getString(PrefsRepository.Keys.PIN.toString(), "") -> {
                         desc.text = "Придумайте новый PIN"
                         Toast.makeText(this, "PIN-код введен верно, можете ввести новый", Toast.LENGTH_SHORT).show()
                         deletePin()
@@ -169,7 +170,7 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             else -> {
-                if (pin == prefs.getString(PrefsHelper.PIN, "")) {
+                if (pin == prefs.getString(PrefsRepository.Keys.PIN.toString(), "")) {
                     refreshToken()
                 } else {
                     Toast.makeText(this, "Неверный PIN-код", Toast.LENGTH_SHORT).show()
@@ -181,7 +182,7 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun updateTokenData(user: User) {
         val ed = prefs.edit()
-        ed.putString(PrefsHelper.TOKEN, user.user_token)
+        ed.putString(PrefsRepository.Keys.TOKEN.toString(), user.user_token)
         ed.apply()
         successAuth()
     }
@@ -194,17 +195,18 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun refreshToken() {
-        tokenService.refreshToken(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        val tokenBody = TokenBody(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""))
+        tokenService.refreshToken(tokenBody, "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
                 override fun onSuccess(t: User) {
-                    System.out.println("Ответ на extend: " + t.user_token)
+                    println("Ответ на extend: " + t.user_token)
                     updateTokenData(t)
                 }
 
                 override fun onError(e: Throwable) {
-                    System.out.println("Refresh error: " + e.message)
+                    println("Refresh error: " + e.message)
                 }
             })
     }

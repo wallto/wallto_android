@@ -4,9 +4,7 @@
  * Last modified 09.08.19 15:33
  */
 
-package com.example.wallto.common;
-
-import com.example.wallto.ui.start.StartBaseActivity;
+package com.example.wallto.base;
 
 public interface BasePresenter {
     void checkTokenValid();

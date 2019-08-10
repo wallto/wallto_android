@@ -6,7 +6,7 @@
 
 package com.example.wallto.ui.start;
 
-import com.example.wallto.common.BasePresenter;
+import com.example.wallto.base.BasePresenter;
 
 public class StartBasePresenter implements BasePresenter {
 

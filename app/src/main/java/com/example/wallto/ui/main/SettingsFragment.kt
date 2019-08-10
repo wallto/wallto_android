@@ -19,7 +19,7 @@ import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.start.StartBaseActivity
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
-import com.example.wallto.utils.PrefsHelper
+import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -60,7 +60,7 @@ class SettingsFragment : Fragment() {
 
         // Убрать или добавить пин код
         switchPin = v.findViewById(R.id.switchPin)
-        if (prefs.getString(PrefsHelper.PIN, "") != "") switchPin.isChecked = true
+        if (prefs.getString(PrefsRepository.Keys.PIN.toString(), "") != "") switchPin.isChecked = true
         switchPin.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val intent = Intent(context, PinCodeActivity::class.java)
@@ -87,7 +87,7 @@ class SettingsFragment : Fragment() {
     }
 
     private val onChangePinClickListener = View.OnClickListener {
-        if (prefs.getString(PrefsHelper.PIN, "") != "") {
+        if (prefs.getString(PrefsRepository.Keys.PIN.toString(), "") != "") {
             val intent = Intent(context, PinCodeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("ACT", "CHANGE")
@@ -98,7 +98,7 @@ class SettingsFragment : Fragment() {
     }
 
     private val onLogoutClickListener = View.OnClickListener {
-        authService.logOut(prefs.getString(PrefsHelper.TOKEN, ""), "gnomes")
+        authService.logOut(prefs.getString(PrefsRepository.Keys.TOKEN.toString(), ""), "gnomes")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<User>() {
@@ -118,8 +118,8 @@ class SettingsFragment : Fragment() {
 
     private fun logout() {
         val e = prefs.edit()
-        e.putString(PrefsHelper.TOKEN, "")
-        e.putString(PrefsHelper.LOGIN, "")
+        e.putString(PrefsRepository.Keys.TOKEN.toString(), "")
+        e.putString(PrefsRepository.Keys.LOGIN.toString(), "")
         e.apply()
         val intent = Intent(context, StartBaseActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -127,7 +127,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showPersonalData() {
-        email.text = prefs.getString(PrefsHelper.LOGIN, "")
+        email.text = prefs.getString(PrefsRepository.Keys.LOGIN.toString(), "")
     }
 
     private fun showVersion() {
