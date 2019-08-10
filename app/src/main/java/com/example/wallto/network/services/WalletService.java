@@ -21,8 +21,8 @@ public interface WalletService {
 
     @GET("wallet/{wid}")
     Single<Wallet> getWallet(@Path("wid") int wid,
-                             @Query("utoken") String token,
-                             @Query("app") String app);
+                             @Header("x-access-token") String token,
+                             @Header("x-api-key") String app);
 
     @GET("history/{wid}")
     Single<ArrayList<History>> getHistory(@Path("wid") int wid,

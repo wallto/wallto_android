@@ -1,4 +1,4 @@
-package com.example.wallto.ui.auth
+package com.example.wallto.ui.start
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.wallto.R
-import com.example.wallto.ui.auth.AuthFragment
 
 class StartFragment : Fragment() {
     private lateinit var btnAuth: Button

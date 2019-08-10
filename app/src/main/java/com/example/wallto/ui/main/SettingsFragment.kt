@@ -16,7 +16,7 @@ import com.example.wallto.R
 import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
-import com.example.wallto.ui.AuthActivity
+import com.example.wallto.ui.start.StartBaseActivity
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.utils.PrefsHelper
@@ -121,7 +121,7 @@ class SettingsFragment : Fragment() {
         e.putString(PrefsHelper.TOKEN, "")
         e.putString(PrefsHelper.LOGIN, "")
         e.apply()
-        val intent = Intent(context, AuthActivity::class.java)
+        val intent = Intent(context, StartBaseActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }

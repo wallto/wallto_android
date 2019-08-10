@@ -1,4 +1,10 @@
-package com.example.wallto.ui
+/*
+ * Created by Mark Abramenko on 10.08.19 12:35
+ * Copyright (c) 2019 . All rights reserved.
+ * Last modified 09.08.19 12:26
+ */
+
+package com.example.wallto.ui.start
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,23 +19,27 @@ import com.example.wallto.R
 import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
-import com.example.wallto.ui.auth.StartFragment
+import com.example.wallto.ui.MainActivity
+import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.utils.PrefsHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class AuthActivity : AppCompatActivity() {
+class StartBaseActivity : AppCompatActivity() {
     private lateinit var tokenService: TokenService
     private lateinit var prefs: SharedPreferences
     private lateinit var progressBar: ProgressBar
     private lateinit var error: TextView
     private var TAG = this.javaClass.simpleName
 
+    private val startBasePresenter = StartBasePresenter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
         progressBar = findViewById(R.id.progressAuth)
         error = findViewById(R.id.tvError)
@@ -67,7 +77,7 @@ class AuthActivity : AppCompatActivity() {
                     if (prefs.getString(PrefsHelper.PIN, "") == "") {
                         refreshToken()
                     } else {
-                        val intent = Intent(this@AuthActivity, PinCodeActivity::class.java)
+                        val intent = Intent(this@StartBaseActivity, PinCodeActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }

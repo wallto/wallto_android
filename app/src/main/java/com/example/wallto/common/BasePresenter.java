@@ -6,5 +6,10 @@
 
 package com.example.wallto.common;
 
+import com.example.wallto.ui.start.StartBaseActivity;
+
 public interface BasePresenter {
+    void checkTokenValid();
+    void refreshToken();
+    void updateTokenData();
 }

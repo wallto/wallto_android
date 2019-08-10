@@ -9,7 +9,7 @@ public interface AuthService {
     @POST("login")
     Single<User> signIn(@Header("x-api-key") String head, @Body UserBody userBody);
 
-    @GET("register")
+    @POST("register")
     Single<User> signUp(@Query("login") String login,
                         @Query("password") String password,
                         @Query("app") String app);

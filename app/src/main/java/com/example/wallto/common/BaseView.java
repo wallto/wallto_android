@@ -7,4 +7,6 @@
 package com.example.wallto.common;
 
 public interface BaseView {
+    void showError();
+    void showData();
 }
