@@ -7,7 +7,5 @@
 package com.example.wallto.base;
 
 public interface BasePresenter {
-    void checkTokenValid();
-    void refreshToken();
-    void updateTokenData();
+    void initNetwork();
 }

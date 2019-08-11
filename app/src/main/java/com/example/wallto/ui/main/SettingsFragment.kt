@@ -16,7 +16,7 @@ import com.example.wallto.R
 import com.example.wallto.data.User
 import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
-import com.example.wallto.ui.start.StartBaseActivity
+import com.example.wallto.ui.start.base.StartBaseActivity
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.utils.PrefsRepository
