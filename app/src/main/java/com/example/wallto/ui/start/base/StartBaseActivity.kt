@@ -6,27 +6,16 @@
 
 package com.example.wallto.ui.start.base
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.wallto.R
-import com.example.wallto.data.User
-import com.example.wallto.data.body.TokenBody
-import com.example.wallto.network.RestApi
-import com.example.wallto.network.services.TokenService
 import com.example.wallto.ui.MainActivity
 import com.example.wallto.ui.PinCodeActivity
 import com.example.wallto.ui.start.StartFragment
-import com.example.wallto.utils.PrefsRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 
 class StartBaseActivity : AppCompatActivity(), StartBaseView {
     private lateinit var progressBar: ProgressBar

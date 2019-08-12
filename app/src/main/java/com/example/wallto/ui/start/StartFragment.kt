@@ -1,3 +1,9 @@
+/*
+ * Created by Mark Abramenko on 12.08.19 20:10
+ * Copyright (c) 2019 . All rights reserved.
+ * Last modified 12.08.19 19:58
+ */
+
 package com.example.wallto.ui.start
 
 import android.os.Bundle
@@ -7,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.wallto.R
+import com.example.wallto.ui.start.register.RegisterFragment
 
 class StartFragment : Fragment() {
     private lateinit var btnAuth: Button

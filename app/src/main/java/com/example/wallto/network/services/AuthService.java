@@ -10,9 +10,7 @@ public interface AuthService {
     Single<User> signIn(@Header("x-api-key") String head, @Body UserBody userBody);
 
     @POST("register")
-    Single<User> signUp(@Query("login") String login,
-                        @Query("password") String password,
-                        @Query("app") String app);
+    Single<User> signUp(@Header("x-api-key") String head, @Body UserBody userBody);
 
     @GET("logout")
     Single<User> logOut(@Header("x-access-token") String token,
