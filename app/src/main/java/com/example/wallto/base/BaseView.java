@@ -7,7 +7,6 @@
 package com.example.wallto.base;
 
 public interface BaseView {
-    void showError();
     void writeLog(String mes);
     void writeLog(String mes, Throwable e);
 }

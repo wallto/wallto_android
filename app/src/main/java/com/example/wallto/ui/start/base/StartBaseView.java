@@ -13,4 +13,5 @@ public interface StartBaseView extends BaseView {
     void openPinCodeActivity();
     void showProgressBar();
     void openStartAuthActivity();
+    void showError();
 }

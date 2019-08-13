@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.wallto.R
+import com.example.wallto.ui.start.auth.AuthFragment
 import com.example.wallto.ui.start.register.RegisterFragment
 
 class StartFragment : Fragment() {
