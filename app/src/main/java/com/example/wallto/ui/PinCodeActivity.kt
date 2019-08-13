@@ -6,10 +6,14 @@
 
 package com.example.wallto.ui
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.TextView
@@ -84,9 +88,19 @@ class PinCodeActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        doVibrate()
         val t: TextView = findViewById(v!!.id)
         pin += t.text.toString()
         addCircles()
+    }
+
+    private fun doVibrate() {
+        val v: Vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            v.vibrate(100)
+        }
     }
 
     private fun deletePin() {

@@ -67,10 +67,6 @@ class RegisterFragment : Fragment(), RegisterView {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun writeLog(mes: String?) {
         Log.e(TAG, mes)
     }
