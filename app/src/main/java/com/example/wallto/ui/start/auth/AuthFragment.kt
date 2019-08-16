@@ -6,13 +6,9 @@
 
 package com.example.wallto.ui.start.auth
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,15 +17,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.data.User
-import com.example.wallto.data.body.UserBody
-import com.example.wallto.network.RestApi
-import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.utils.PrefsRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 
 class AuthFragment : Fragment(), AuthView {
     private lateinit var login: EditText
@@ -38,7 +26,7 @@ class AuthFragment : Fragment(), AuthView {
 
     private var TAG = this.javaClass.simpleName
 
-    private val presenter = AuthPresenterImpl(this)
+    private val presenter = AuthPresenter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_auth, container, false)

@@ -22,7 +22,7 @@ class StartBaseActivity : AppCompatActivity(), StartBaseView {
     private lateinit var error: TextView
     private var TAG = this.javaClass.simpleName
 
-    private val presenter = StartBasePresenterImpl(this)
+    private val presenter = StartBasePresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)

@@ -6,10 +6,8 @@
 
 package com.example.wallto.ui.start.register
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.wallto.R
-import com.example.wallto.data.User
-import com.example.wallto.network.RestApi
-import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.start.StartFragment
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 
 class RegisterFragment : Fragment(), RegisterView {
 
@@ -35,7 +27,7 @@ class RegisterFragment : Fragment(), RegisterView {
 
     private var TAG = this.javaClass.simpleName
 
-    private val presenter = RegisterPresenterImpl(this)
+    private val presenter = RegisterPresenter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_register, container, false)
