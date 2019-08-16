@@ -14,7 +14,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.wallto.R
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.ui.PinCodeActivity
+import com.example.wallto.ui.pin.PinCodeActivity
 import com.example.wallto.ui.start.StartFragment
 
 class StartBaseActivity : AppCompatActivity(), StartBaseView {

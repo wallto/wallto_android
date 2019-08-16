@@ -32,4 +32,13 @@
     <string name="pin">Введите PIN</string>
     <string name="sum">Сумма (в сатоши)</string>
     <string name="address">Адрес</string>
+    <string name="pin_oldpin">Введите старый PIN</string>
+    <string name="pin_concoct">Придумайте PIN</string>
+    <string name="pin_firstold">Сначала введите старый PIN</string>
+    <string name="pin_protected">Теперь ваш кошелек защищен PIN-кодом</string>
+    <string name="pin_deleted">PIN-код удален</string>
+    <string name="pin_wrong">Неверный PIN-код</string>
+    <string name="pin_correct">PIN-код введен верно, можете ввести новый</string>
+    <string name="pin_enteredold">Вы ввели старый PIN</string>
+    <string name="pin_changed_success">Вы успешно изменили PIN-код</string>
 </resources>

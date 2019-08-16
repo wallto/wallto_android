@@ -21,7 +21,7 @@ import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.TokenService
 import com.example.wallto.network.services.WalletService
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.ui.PinCodeActivity
+import com.example.wallto.ui.pin.PinCodeActivity
 import com.example.wallto.ui.main.walletslist.WalletsAdapter
 import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers

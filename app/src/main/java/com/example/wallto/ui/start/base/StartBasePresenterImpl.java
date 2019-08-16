@@ -7,24 +7,16 @@
 package com.example.wallto.ui.start.base;
 
 import android.annotation.SuppressLint;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import com.example.wallto.data.User;
 import com.example.wallto.data.body.TokenBody;
 import com.example.wallto.network.RestApi;
 import com.example.wallto.network.services.TokenService;
-import com.example.wallto.ui.PinCodeActivity;
-import com.example.wallto.ui.start.base.StartBasePresenter;
 import com.example.wallto.utils.PrefsRepository;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 import java.util.Objects;
-
-import static android.support.constraint.Constraints.TAG;
 
 public class StartBasePresenterImpl implements StartBasePresenter {
 

@@ -18,7 +18,7 @@ import com.example.wallto.network.RestApi
 import com.example.wallto.network.services.AuthService
 import com.example.wallto.ui.start.base.StartBaseActivity
 import com.example.wallto.ui.MainActivity
-import com.example.wallto.ui.PinCodeActivity
+import com.example.wallto.ui.pin.PinCodeActivity
 import com.example.wallto.utils.PrefsRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
